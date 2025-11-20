@@ -136,24 +136,21 @@ void Board::displayTrack(int player_index) {
 }
 
 void Board::displayBoard() {
-    for (int i = 0; i < 2; i++) {
-        displayTrack(i);
-        if (i == 0) {
-            cout << endl; // Add an extra line between the two lanes
-        }
-    }
+    // visually clear terminal
+    system("clear");
+
+    displayTrack(0);
+    cout << endl;
+    displayTrack(1);
+    cout << endl << endl;
 }
 
 bool Board::movePlayer(int player_index) {
     // Increment player position by 1
     _player_position[player_index]++;
 
-    // Player reached last tile
-    if (_player_position[player_index] == _BOARD_SIZE - 1) {
-        return true;
-    }
-
-    return false;
+    // Return if player reached last tile
+    return _player_position[player_index] == _BOARD_SIZE - 1;
 }
 
 int Board::getPlayerPosition(int player_index) const {
