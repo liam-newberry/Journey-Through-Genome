@@ -75,7 +75,8 @@ int GameLoop::getReviewAdvisorChoice() {
 
     while (true) { 
         cout <<         "Display the advisor’s abilities"
-             << endl << "Use the abilities for the challenge";
+             << endl << "Use the abilities for the challenge"
+             << endl << endl;
 
         cout << player.name << ", what is your choice 1-2? ";
         cin >> input;
@@ -116,16 +117,22 @@ void GameLoop::evaluateReviewAdvisorChoice(int choice) {
 void GameLoop::reviewDiscoverPoints() {
     Player& player = getCurrentPlayer();
 
-    cout << "Discovery Points: " << player.character.getDiscoveryPoints() << endl << endl;
+    cout << "Discovery Points: "
+         << EscapeColors::colorString(player.character.getDiscoveryPoints(), EscapeColors::YELLOW)
+         << endl << endl;
 }
 
 void GameLoop::reviewTraitStats() {
     Player& player = getCurrentPlayer();
 
-    cout << "Experience: " << player.character.getExperience() << endl
-         << "Accuracy:   " << player.character.getAccuracy() << endl
-         << "Efficiency: " << player.character.getEfficiency() << endl
-         << "Insight:    " << player.character.getInsight()
+    cout <<         "Experience: " 
+         << EscapeColors::colorString(player.character.getExperience(), EscapeColors::YELLOW)
+         << endl << "Accuracy:   " 
+         << EscapeColors::colorString(player.character.getAccuracy(), EscapeColors::YELLOW)
+         << endl << "Efficiency: " 
+         << EscapeColors::colorString(player.character.getEfficiency(), EscapeColors::YELLOW)
+         << endl << "Insight:    " 
+         << EscapeColors::colorString(player.character.getInsight(), EscapeColors::YELLOW)
          << endl << endl;
 }
 
@@ -133,14 +140,17 @@ void GameLoop::reviewCharacter() {
     Player& player = getCurrentPlayer();
     
     cout << EscapeColors::colorString(player.character.getName(), EscapeColors::CYAN)
-         << " has " << player.character.getExperience() << " experience."
-         << endl << endl;
+         << " has " 
+         << EscapeColors::colorString(player.character.getExperience(), EscapeColors::YELLOW)
+         << " experience" << endl << endl;
 }
 
 void GameLoop::reviewPosition() {
     Player& player = getCurrentPlayer();
 
-    cout << player.name << " is at tile " << board.getPlayerPosition(turn) << "." << endl << endl;
+    cout << player.name << " is at tile " 
+         << EscapeColors::colorString(board.getPlayerPosition(turn), EscapeColors::BLUE)
+         << "." << endl << endl;
 }
 
 void GameLoop::reviewAdvisorAbilities() { 
@@ -155,12 +165,14 @@ void GameLoop::useAdvisorAbilities() {
 }
 
 void GameLoop::moveForward() {
+    Player& player = getCurrentPlayer();
+
     srand(time(0));
 
     int roll = (rand() % 6) + 1;
     int forward = roll;
 
-    if (forward + board.getPlayerPosition(turn) >= 51) {
+    if (forward + board.getPlayerPosition(turn) > 51) {
         forward =  51 - board.getPlayerPosition(turn);
     }
 
@@ -170,8 +182,8 @@ void GameLoop::moveForward() {
 
     board.displayBoard();
 
-    cout << "You rolled a " 
-         << EscapeColors::colorString(roll, EscapeColors::GREEN)
+    cout << player.name << " rolled a " 
+         << EscapeColors::colorString(roll, EscapeColors::RED)
          << "!" << endl << endl;
 
     changeTurn();
