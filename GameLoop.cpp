@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #include "GameLoop.h"
 #include "HelperMethods.h"
 #include "EscapeColors.h"

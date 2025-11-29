@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef CHARACTER_H
 #define CHARACTER_H
 

@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #include "EndGame.h"
 #include "HelperMethods.h"
 #include "EscapeColors.h"

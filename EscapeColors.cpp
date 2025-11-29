@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #include "EscapeColors.h"
 
 using namespace std;

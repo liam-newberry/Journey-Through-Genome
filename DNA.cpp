@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #include "DNA.h"
 
 #include <iostream>

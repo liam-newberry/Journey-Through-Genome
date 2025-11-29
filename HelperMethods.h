@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef HELPERMETHODS_H
 #define HELPERMETHODS_H
 

@@ -1,5 +1,5 @@
-// Recognized as "include guards"
-// Prevent the board header file from being used more than once
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef BOARD_H
 #define BOARD_H
 

@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #include "HelperMethods.h"
 #include "EscapeColors.h"
 
@@ -5,7 +7,6 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
-#include <iomanip>
 
 using namespace std;
 
@@ -19,7 +20,7 @@ bool HelperMethods::isValidIntChoice(string s, int low, int high) {
     }
 }
 
-//
+// cout a commonly used red error message
 void HelperMethods::invalidInput() { 
     cout << endl
          << EscapeColors::colorString("Invalid input", EscapeColors::RED) 
@@ -79,6 +80,7 @@ void HelperMethods::sortScores(vector<vector<string>>& scores) {
     }
 }
 
+// read the scores into a 2D vector from scores.txt
 vector<vector<string>> HelperMethods::getScores() {
     vector<vector<string>> scores;
     ifstream input("scores.txt");
@@ -98,6 +100,8 @@ vector<vector<string>> HelperMethods::getScores() {
     return scores;
 }
 
+
+// overwrite/create scores.txt with updated scores
 void HelperMethods::writeScores(vector<vector<string>> scores) {
     ofstream output("scores.txt");
 
@@ -119,13 +123,17 @@ int HelperMethods::getMaxScoreIndex(vector<vector<string>>& scores, int start) {
     return highest_ind;
 }
 
+// returns the OS the user is on using and constructs user_os
 string HelperMethods::getOS() {
     string os;
 
-    #ifdef _WIN32 
+    // if _WIN32 is defined (only defined if ran on windows (32 or 64)), keep the following code
+    #ifdef _WIN32
         os = "windows";
+    // if _WIN32 not defined, keep the following code
     #else
         os = "unix";
+    // stop the conditional operation and return to regular code
     #endif
 
     return os;

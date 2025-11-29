@@ -1,4 +1,5 @@
-// Source file calling the header file
+// File created by: Liam Newberry & Lyle Stone
+
 #include "Board.h"
 #include "HelperMethods.h"
 // Recall we use this preprocessor directive for rand() and srand()

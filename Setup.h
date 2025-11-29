@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef SETUP_H
 #define SETUP_H
 

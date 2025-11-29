@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef GAMELOOP_H
 #define GAMELOOP_H
 

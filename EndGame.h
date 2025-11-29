@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef ENDGAME_H
 #define ENDGAME_H
 

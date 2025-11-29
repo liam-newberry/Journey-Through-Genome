@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #include "Board.h"
 #include "Player.h"
 #include "Setup.h"

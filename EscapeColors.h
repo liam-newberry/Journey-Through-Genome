@@ -1,3 +1,5 @@
+// File created by: Liam Newberry & Lyle Stone
+
 #ifndef ESCAPECOLORS_H
 #define ESCAPECOLORS_H
 
