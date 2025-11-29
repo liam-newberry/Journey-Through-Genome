@@ -1,14 +1,24 @@
+#ifndef SETUP_H
+#define SETUP_H
+
 #include <string>
 
 #include "Player.h"
 
 using namespace std;
 
-void getPlayerNames(Player& player1, Player& player2);
-bool isValidIntChoice(string s, int low, int high);
-void getPlayerColor(Player& player, string taken);
-void getCharacterChoice(Player& player);
-void getPathChoice(Player& player);
-void getAdvisorChoice(Player& player);
-void evaluatePathChoice(Player& player);
-void intialize_players(Player& player1, Player& player2);
+class Setup {
+public:
+    static void intialize_players(Player& player1, Player& player2);
+
+private:
+    static void getPlayerNames(Player& player1, Player& player2);
+    static bool isValidIntChoice(string s, int low, int high);
+    static void getPlayerColor(Player& player, string taken);
+    static void getCharacterChoice(Player& player);
+    static void getPathChoice(Player& player);
+    static void getAdvisorChoice(Player& player);
+    static void evaluatePathChoice(Player& player);
+};
+
+#endif

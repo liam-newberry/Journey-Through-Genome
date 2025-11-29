@@ -12,6 +12,8 @@ private:
 public:
     static string colorString(string s, string color);
     static string colorString(int s, string color);
+    static string colorString(string s, int color_index);
+    static string colorString(int s, int color_index);
 
     static const string BLACK;
     static const string RED;

@@ -10,6 +10,7 @@ using namespace std;
 
 struct Player {
     string name;
+    string plain_name;
     string color;
     Character character;
     string path;

@@ -1,33 +1,33 @@
-#include <iostream>
-// #include <vector>
-
-// #include "Board.h"
-// #include "Tile.h"
-// #include "Character.h"
+#include "Board.h"
 #include "Player.h"
 #include "Setup.h"
 #include "GameLoop.h"
 #include "HelperMethods.h"
-// #include "EscapeColors.h"
+#include "EndGame.h"
 
 using namespace std;
 
 // main driver function
 int main() {
-    Player player1, player2;
-    intialize_players(player1, player2);
+    bool new_game = true;
 
-    HelperMethods::clearPrintHeading("Game Begin");
-    GameLoop loop(player1, player2);
-    loop.runLoop();
+    while (new_game) {
+        HelperMethods::clearTerminal();
 
-    // Board b;
-    // b.displayBoard();
+        Player player1, player2;
+        Setup::intialize_players(player1, player2);
 
-    // while (!b.movePlayer(0)) {}
-    // while (!b.movePlayer(1)) {}
+        HelperMethods::clearPrintHeading("Game Begin");
 
-    // b.displayBoard();
+        Board board(player1, player2);
+        GameLoop loop(player1, player2, board);
+
+        // loop.runLoop();
+
+        new_game = EndGame::runLoop(player1, player2);
+    }
+
+    HelperMethods::clearPrintHeading("Thank you for playing!");
 
     return 0;
 }

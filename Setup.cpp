@@ -2,27 +2,56 @@
 #include <iomanip>
 #include <vector>
 
+#include "Setup.h"
 #include "Player.h"
 #include "EscapeColors.h"
 #include "HelperMethods.h"
 
 using namespace std;
 
+// setup player traits
+void Setup::intialize_players(Player& player1, Player& player2) {
+    HelperMethods::clearPrintHeading("Names");
+    getPlayerNames(player1, player2);
+
+    HelperMethods::clearPrintHeading("Colors");
+    getPlayerColor(player1, "");
+    getPlayerColor(player2, player1.color);
+ 
+    HelperMethods::clearPrintHeading("Characters");
+    getCharacterChoice(player1);
+    getCharacterChoice(player2);
+
+    HelperMethods::clearPrintHeading("Paths");
+    getPathChoice(player1);
+    getPathChoice(player2);
+
+    if (player1.path == "Training Fellowship" || player2.path == "Training Fellowship") {
+        HelperMethods::clearPrintHeading("Advisors");
+    }
+    evaluatePathChoice(player1);
+    evaluatePathChoice(player2);
+}
+
 // get players' names
-void getPlayerNames(Player& player1, Player& player2) {
+void Setup::getPlayerNames(Player& player1, Player& player2) {
     cout << "Player 1 name: ";
     cin >> player1.name;
+    player1.name = player1.name.substr(0,20); // max name length 20
+    player1.plain_name = player1.name;
 
     cout << endl << "Player 2 name: ";
     cin >> player2.name;
+    player2.name = player2.name.substr(0,20); // max name length 20
+    player2.plain_name = player2.name;
 }
 
 // get the player's color; used every time they're name is displayed
-void getPlayerColor(Player& player, string taken) {
+void Setup::getPlayerColor(Player& player, string taken) {
     string input;
 
     while (true) { // this is used to make the input safe if the input is invalid
-        cout << player.name << ", what color would you like?" << endl;
+        cout << player.name << ", what color would you like? Enter 1-8" << endl;
 
         for (int i = 0; i < 7; i++) {
             cout << EscapeColors::colorString(i + 1, EscapeColors::COLORS[i]) << ", ";
@@ -47,7 +76,7 @@ void getPlayerColor(Player& player, string taken) {
 }
 
 // get players' choice of character
-void getCharacterChoice(Player& player) {
+void Setup::getCharacterChoice(Player& player) {
     vector<Character> characters = makeCharacters();
 
     string input;
@@ -73,7 +102,8 @@ void getCharacterChoice(Player& player) {
     }
 }
 
-void getPathChoice(Player& player) {
+// get the path choice for a player
+void Setup::getPathChoice(Player& player) {
     string input;
 
     while (true) { // this is used to make the input safe if the input is invalid
@@ -99,7 +129,8 @@ void getPathChoice(Player& player) {
     }
 }
 
-void getAdvisorChoice(Player& player) {
+// get the advisor choice if needed for a player
+void Setup::getAdvisorChoice(Player& player) {
     vector<Advisor> advisors = makeAdvisors();
 
     string input;
@@ -124,7 +155,8 @@ void getAdvisorChoice(Player& player) {
     }
 }
 
-void evaluatePathChoice(Player& player) {
+// change trait values based on the path chosen
+void Setup::evaluatePathChoice(Player& player) {
     if (player.path == "Training Fellowship") {
         player.character.changeDiscoveryPoints(-5000);
         player.character.changeAccuracy(500);
@@ -138,28 +170,4 @@ void evaluatePathChoice(Player& player) {
         player.character.changeEfficiency(200);
         player.character.changeInsight(200);
     }
-}
-
-// set player names and characters
-void intialize_players(Player& player1, Player& player2) {
-    HelperMethods::clearPrintHeading("Names");
-    getPlayerNames(player1, player2);
-
-    HelperMethods::clearPrintHeading("Colors");
-    getPlayerColor(player1, "");
-    getPlayerColor(player2, player1.color);
- 
-    HelperMethods::clearPrintHeading("Characters");
-    getCharacterChoice(player1);
-    getCharacterChoice(player2);
-
-    HelperMethods::clearPrintHeading("Paths");
-    getPathChoice(player1);
-    getPathChoice(player2);
-
-    if (player1.path == "Training Fellowship" || player2.path == "Training Fellowship") {
-        HelperMethods::clearPrintHeading("Advisors");
-    }
-    evaluatePathChoice(player1);
-    evaluatePathChoice(player2);
 }

@@ -23,8 +23,7 @@
 using namespace std;
 
 // =========================== Constructor ===========================
-
-Board::Board() {
+Board::Board(Player& p1, Player& p2) : player1(p1), player2(p2) {
     // Creates two players
     _player_count = _MAX_PLAYERS;
 
@@ -38,8 +37,8 @@ Board::Board() {
 }
 
 // =========================== Private Member Functions ===========================
-
-void Board::initializeTiles(int player_index) {
+/** 
+void initializeTiles(int player_index) {
     Tile tile;
     int green_count = 0;
     // Recall 52 from header file
@@ -86,6 +85,61 @@ void Board::initializeTiles(int player_index) {
         // Recall i refers to tile 0 to 51
         _tiles[player_index][i] = tile;
     }
+} */
+void Board::initializeTiles(int player_index) {
+    Tile tile;
+    Player& player = player_index == 0 ? player1 : player2;
+    
+    int total_tiles = _BOARD_SIZE;
+
+    tile.color = 'Y';
+    _tiles[player_index][0] = tile;
+    tile.color = 'O';
+    _tiles[player_index][total_tiles - 1] = tile;
+
+    int greens, blues, pinks, browns, reds, purples;
+    if (player.path ==        "Training Fellowship") {
+        greens =    30;
+        blues =     6;
+        pinks =     5;
+        browns =    3;
+        reds =      2;
+        purples =   4;
+    } else if (player.path == "Direct Lab Assignment") {
+        greens =    30;
+        blues =     4;
+        pinks =     3;
+        browns =    4;
+        reds =      6;
+        purples =   3;
+    }
+
+    int rand_num;
+    for (int i = 1; i < total_tiles - 1; i++) {
+        rand_num = HelperMethods::randomInt(1, greens + blues + pinks + browns + reds + purples);
+
+        if (rand_num <= greens) {
+            tile.color = 'G';
+            greens--;
+        } else if (rand_num <= greens + blues) {
+            tile.color = 'B';
+            blues--;
+        } else if (rand_num <= greens + blues + pinks) {
+            tile.color = 'P';
+            pinks--;
+        } else if (rand_num <= greens + blues + pinks + browns) {
+            tile.color = 'T';
+            browns--;
+        } else if (rand_num <= greens + blues + pinks + browns + reds) {
+            tile.color = 'R';
+            reds--;
+        } else {
+            tile.color = 'U';
+            purples--;
+        }
+
+        _tiles[player_index][i] = tile;
+    }
 }
 
 bool Board::isPlayerOnTile(int player_index, int pos) {
@@ -123,10 +177,8 @@ void Board::displayTile(int player_index, int pos) {
 // =========================== Public Member Functions ===========================
 
 void Board::initializeBoard() {
-    for (int i = 0; i < 2; i++) {
-        // This ensures each lane (or each player) has a unique tile distribution
-        initializeTiles(i);
-    }
+    initializeTiles(0);
+    initializeTiles(1);
 }
 
 void Board::displayTrack(int player_index) {
@@ -140,10 +192,11 @@ void Board::displayBoard() {
     // visually clear terminal
     HelperMethods::clearTerminal();
 
+    cout << player1.name << endl;
     displayTrack(0);
-    cout << endl;
+    cout << player2.name << endl;
     displayTrack(1);
-    cout << endl;
+    cout << endl << endl;
 }
 
 bool Board::movePlayer(int player_index) {

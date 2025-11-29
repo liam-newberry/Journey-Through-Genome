@@ -28,6 +28,14 @@ string EscapeColors::colorString(int s, string color) {
     return items[0] + to_string(s) + items[1];
 }
 
+string EscapeColors::colorString(string s, int color_index) {
+    return colorString(s, COLORS[color_index]);
+}
+
+string EscapeColors::colorString(int s, int color_index) {
+    return colorString(s, COLORS[color_index]);
+}
+
 const string EscapeColors::BLACK   = "\033[30m \033[0m";
 const string EscapeColors::RED     = "\033[31m \033[0m";
 const string EscapeColors::GREEN   = "\033[32m \033[0m";

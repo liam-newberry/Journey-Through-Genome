@@ -6,7 +6,7 @@
 
 class GameLoop {
 public:
-    GameLoop(Player& p1, Player& p2);
+    GameLoop(Player& p1, Player& p2, Board& b);
     void runLoop();
 
 private:
@@ -30,8 +30,8 @@ private:
     Player& getCurrentPlayer();
     void changeTurn();
 
-    Board board;
     Player& player1, player2;
+    Board& board;
     int turn;
 };
 
