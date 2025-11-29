@@ -21,6 +21,7 @@ public:
 
 private:
     static int getMaxScoreIndex(vector<vector<string>>& scores, int start);
+    static bool seedRandom();
 
     static bool seeded_random;
 };

@@ -30,7 +30,7 @@ void HelperMethods::clearTerminal() {
 }
 
 void HelperMethods::printHeading(string heading) {
-    const int LENGTH = 150;
+    const int LENGTH = 120;
 
     string decoration = string(LENGTH, '='); // makes a new string with '=' char 30 times
     decoration = EscapeColors::colorString(decoration, EscapeColors::CYAN);
@@ -49,11 +49,6 @@ void HelperMethods::clearPrintHeading(string heading) {
 }
 
 int HelperMethods::randomInt(int min, int max) {
-    if (!seeded_random) {
-        srand(time(0));
-        seeded_random = true;
-    }
-
     return min + rand() % (max - min + 1);
 }
 
@@ -69,7 +64,7 @@ void HelperMethods::sortScores(vector<vector<string>>& scores) {
     int highest;
     vector<string> temp(2);
 
-    for (int i = 0; i < scores.size(); i++) {
+    for (int i = 0; i < scores.size() - 1; i++) {
         highest = getMaxScoreIndex(scores, i);
         temp = scores[i];
         scores[i] = scores[highest];
@@ -116,4 +111,9 @@ int HelperMethods::getMaxScoreIndex(vector<vector<string>>& scores, int start) {
     return highest_ind;
 }
 
-bool HelperMethods::seeded_random = false;
+bool HelperMethods::seedRandom() {
+    srand(time(0));
+    return true;
+}
+
+bool HelperMethods::seeded_random = seedRandom();
