@@ -19,16 +19,19 @@ bool HelperMethods::isValidIntChoice(string s, int low, int high) {
     }
 }
 
+//
 void HelperMethods::invalidInput() { 
     cout << endl
          << EscapeColors::colorString("Invalid input", EscapeColors::RED) 
          << endl << endl; // This makes the error code red
 }
 
+// clear the terminal; unix - "clear", windows - "cls"
 void HelperMethods::clearTerminal() {
-    system("clear");
+    user_os == "unix" ? system("clear") : system("cls");
 }
 
+// displays a decorated heading
 void HelperMethods::printHeading(string heading) {
     const int LENGTH = 120;
 
@@ -43,19 +46,23 @@ void HelperMethods::printHeading(string heading) {
          << endl << decoration << endl << endl;
 }
 
+// displays a heading and clears screen
 void HelperMethods::clearPrintHeading(string heading) {
     clearTerminal();
     printHeading(heading);
 }
 
+// returns random int [min,max]
 int HelperMethods::randomInt(int min, int max) {
     return min + rand() % (max - min + 1);
 }
 
+// returns random int [0,max]
 int HelperMethods::randomInt(int max) {
     return randomInt(0, max);
 }
 
+// sorts a 2D vector of scores
 void HelperMethods::sortScores(vector<vector<string>>& scores) {
     if (scores.size() <= 1) {
         return;
@@ -99,6 +106,7 @@ void HelperMethods::writeScores(vector<vector<string>> scores) {
     }
 }
 
+// finds the max index of a subsection of scores; helper for sorting
 int HelperMethods::getMaxScoreIndex(vector<vector<string>>& scores, int start) {
     int highest_ind = start;
 
@@ -111,9 +119,23 @@ int HelperMethods::getMaxScoreIndex(vector<vector<string>>& scores, int start) {
     return highest_ind;
 }
 
+string HelperMethods::getOS() {
+    string os;
+
+    #ifdef _WIN32 
+        os = "windows";
+    #else
+        os = "unix";
+    #endif
+
+    return os;
+}
+
+// basically a constructor for seeded_random to seed random
 bool HelperMethods::seedRandom() {
     srand(time(0));
     return true;
 }
 
-bool HelperMethods::seeded_random = seedRandom();
+string HelperMethods::user_os = getOS(); // gets user OS for clear command
+bool HelperMethods::seeded_random = seedRandom(); // seeds random automatically
