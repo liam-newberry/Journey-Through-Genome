@@ -1,4 +1,3 @@
-Question(answer specifications)|Answer
 I can iterate endlessly or break on command. I’m great at looping through tasks. What am I? (single word, lowercase)|loop
 I am the symbol used to compare two values for equality. What am I? (symbol)|==
 I’m a function without a return type. What am I? (single word, lowercase)|void

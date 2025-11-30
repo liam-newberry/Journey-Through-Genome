@@ -5,6 +5,7 @@
 
 #include "Player.h"
 #include "Board.h"
+#include "Event.h"
 
 class GameLoop {
 public:
@@ -24,9 +25,17 @@ private:
     void reviewTraitStats();
     void reviewCharacter();
     void reviewPosition();
-    void reviewAdvisorAbilities();
-    void useAdvisorAbilities();
+    void reviewAdvisorDescription();
+    void reviewAdvisorBonuses();
     void moveForward();
+
+    void rolledGreen();
+    void rolledBlue();
+    void rolledPink();
+    void rolledBrown();
+    void rolledRed();
+    void rolledPurple();
+    void rolledOrange();
 
     int getTurn() const;
     Player& getCurrentPlayer();
@@ -35,6 +44,9 @@ private:
     Player& player1, player2;
     Board& board;
     int turn;
+
+    vector<Event> events;
+    vector<vector<string>> riddles;
 };
 
 #endif

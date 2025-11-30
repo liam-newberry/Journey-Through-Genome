@@ -2,6 +2,7 @@
 
 #include "HelperMethods.h"
 #include "EscapeColors.h"
+#include "Event.h"
 
 #include <string>
 #include <iostream>
@@ -63,6 +64,78 @@ int HelperMethods::randomInt(int max) {
     return randomInt(0, max);
 }
 
+// read in and return random_events.txt
+vector<Event> HelperMethods::getEvents() {
+    vector<Event> events; 
+
+    ifstream input("random_events.txt");
+
+    string data;
+
+    while(getline(input, data)) {
+        Event event;
+        event.initializeData(data);
+        events.push_back(event);
+    }
+
+    return events;
+}
+
+// read in and return riddles.txt
+vector<vector<string>> HelperMethods::getRiddles() {
+    vector<vector<string>> riddles; 
+
+    ifstream input("riddles.txt");
+
+    string data;
+
+    while(getline(input, data)) {
+        vector<string> riddle(2);
+        
+        int i = 0;
+        while (data[i] != '|') {
+            i++;
+        }
+
+        riddle[0] = data.substr(0,i);
+        riddle[1] = data.substr(i + 1);
+
+        riddles.push_back(riddle);
+    }
+
+    return riddles;
+}
+
+// print a certain color for each nucleotide
+void HelperMethods::printNeucleotide(char c) {
+    switch (c) {
+        case 'A': cout << EscapeColors::colorString("A", EscapeColors::GREEN); break;
+        case 'C': cout << EscapeColors::colorString("C", EscapeColors::BLUE); break;
+        case 'G': cout << EscapeColors::colorString("G", EscapeColors::YELLOW); break;
+        case 'T': cout << EscapeColors::colorString("T", EscapeColors::RED); break;
+    }
+}
+
+// returns if Advisor in a vector of Advisors
+bool HelperMethods::inAdvisorVector(Advisor advisor, vector<Advisor> advisors) {
+    for (int i = 0; i < advisors.size(); i++) {
+        if (advisor.name == advisors[i].name) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+// checks if strings are identical (extra checks for '\r')
+bool HelperMethods::stringCompare(string s1, string s2) {
+    // you have to do this weird thing to remove white space '\r' from .txt
+    s1.erase(remove(s1.begin(), s1.end(), '\r'), s1.end());
+    s2.erase(remove(s2.begin(), s2.end(), '\r'), s2.end());
+
+    return s1 == s2;
+}
+
 // sorts a 2D vector of scores
 void HelperMethods::sortScores(vector<vector<string>>& scores) {
     if (scores.size() <= 1) {
@@ -99,7 +172,6 @@ vector<vector<string>> HelperMethods::getScores() {
 
     return scores;
 }
-
 
 // overwrite/create scores.txt with updated scores
 void HelperMethods::writeScores(vector<vector<string>> scores) {

@@ -38,55 +38,6 @@ Board::Board(Player& p1, Player& p2) : player1(p1), player2(p2) {
 }
 
 // =========================== Private Member Functions ===========================
-/** 
-void initializeTiles(int player_index) {
-    Tile tile;
-    int green_count = 0;
-    // Recall 52 from header file
-    int total_tiles = _BOARD_SIZE;
-
-    for (int i = 0; i < total_tiles; i++) {
-        // Set the last tile as Orange for the finish line
-        if (i == total_tiles - 1) {
-            tile.color = 'O';
-        } 
-        // Set the first tile as Grey for the starting line
-        else if (i == 0) {
-            tile.color = 'Y';
-        } 
-        // Hard-coded target of 30 green tiles
-        // Probablisitic method to spread out the green tiles randomly
-        else if (green_count < 30 && (rand() % (total_tiles - i) < 30 - green_count)) {
-            tile.color = 'G';
-            green_count++;
-        }
-        // Randomly assign one of the other colors: Blue, Pink, Brown, Red, Purple
-        else {
-            int color_choice = rand() % 5;
-            switch (color_choice) {
-                case 0:
-                    tile.color = 'B'; // Blue
-                    break;
-                case 1:
-                    tile.color = 'P'; // Pink
-                    break;
-                case 2:
-                    tile.color = 'T'; // Brown
-                    break;
-                case 3:
-                    tile.color = 'R'; // Red
-                    break;
-                case 4:
-                    tile.color = 'U'; // Purple
-                    break;
-            }
-        }
-
-        // Assign the tile to the board for the specified lane/player 1 or 2
-        // Recall i refers to tile 0 to 51
-        _tiles[player_index][i] = tile;
-    }
-} */
 void Board::initializeTiles(int player_index) {
     Tile tile;
     Player& player = player_index == 0 ? player1 : player2;
@@ -223,4 +174,8 @@ int Board::getPlayerPosition(int player_index) const {
         return _player_position[player_index];
     }
     return -1;
+}
+
+char Board::getCurrentTileColor(int player_index) const {
+    return _tiles[player_index][getPlayerPosition(player_index)].color;
 }

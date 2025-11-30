@@ -24,7 +24,7 @@ int main() {
         Board board(player1, player2);
         GameLoop loop(player1, player2, board);
 
-        // loop.runLoop();
+        loop.runLoop();
 
         new_game = EndGame::runLoop(player1, player2);
     }
