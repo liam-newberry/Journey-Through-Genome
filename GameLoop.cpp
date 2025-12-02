@@ -7,7 +7,6 @@
 #include "DNA.h"
 
 #include <iostream>
-#include <ctime>
 #include <vector>
 
 using namespace std;
@@ -180,9 +179,7 @@ void GameLoop::reviewAdvisorBonuses() {
 void GameLoop::moveForward() {
     Player& player = getCurrentPlayer();
 
-    srand(time(0));
-
-    int roll = (rand() % 6) + 1;
+    int roll = HelperMethods::randomInt(1,6);
     int forward = roll;
 
     if (forward + board.getPlayerPosition(turn) > 51) {
