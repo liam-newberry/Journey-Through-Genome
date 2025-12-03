@@ -40,11 +40,11 @@ private:
     int getTurn() const;
     Player& getCurrentPlayer();
     void changeTurn();
-
+    // Member variables
     Player& player1, player2;
     Board& board;
     int turn;
-
+    // Events and Riddles from text files
     vector<Event> events;
     vector<vector<string>> riddles;
 };

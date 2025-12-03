@@ -11,6 +11,7 @@
 using namespace std;
 
 struct Event {
+    // Public member variables
     string description;
     string path;
     vector<Advisor> advisor_vector;

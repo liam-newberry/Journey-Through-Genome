@@ -2,6 +2,7 @@
 
 #include "Event.h"
 
+// initializes Event data from a string
 void Event::initializeData(string data) {
     string sections[4];
     splitData(sections, data);
@@ -20,6 +21,7 @@ void Event::initializeData(string data) {
     discoveryPoints = stoi(sections[3]);
 }
 
+// splits the data string into its component sections
 void Event::splitData(string sections[4], string data) {
     int last = -1;
     int count = 0;

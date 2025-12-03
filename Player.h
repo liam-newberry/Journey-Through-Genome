@@ -10,6 +10,7 @@
 
 using namespace std;
 
+// struct to hold all player-related data
 struct Player {
     string name;
     string plain_name;

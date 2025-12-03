@@ -11,18 +11,21 @@
 
 using namespace std;
 
+// constructor to initialize players and board and read text files
 GameLoop::GameLoop(Player& p1, Player& p2, Board& b) : player1(p1), player2(p2), board(b) {
     turn = 0;
     events = HelperMethods::getEvents();
     riddles = HelperMethods::getRiddles();
 }
 
+// main game loop that continues until a player reaches the end of the board
 void GameLoop::runLoop() {
     while (board.getPlayerPosition(0) < 51 || board.getPlayerPosition(1) < 51) {
         evaluateMenuChoice(getMenuChoice());
     }
 }
 
+// get the main menu choice from the user
 int GameLoop::getMenuChoice() {
     Player& player = getCurrentPlayer();
 
@@ -53,6 +56,7 @@ int GameLoop::getMenuChoice() {
     }
 }
 
+// get the player progress menu choice from the user
 int GameLoop::getPlayerProgressChoice() {
     Player& player = getCurrentPlayer();
 
@@ -74,6 +78,7 @@ int GameLoop::getPlayerProgressChoice() {
     }
 }
 
+// get the review advisor menu choice from the user
 int GameLoop::getReviewAdvisorChoice() {
     Player& player = getCurrentPlayer();
 
@@ -96,6 +101,7 @@ int GameLoop::getReviewAdvisorChoice() {
     }
 }
 
+// evaluate the main menu choice
 void GameLoop::evaluateMenuChoice(int choice) {
     switch(choice) {
         case 1: evaluatePlayerProgressChoice(getPlayerProgressChoice()); break;
@@ -106,6 +112,7 @@ void GameLoop::evaluateMenuChoice(int choice) {
     }
 }
 
+// evaluate the player progress menu choice
 void GameLoop::evaluatePlayerProgressChoice(int choice) {
     switch(choice) {
         case 1: reviewDiscoverPoints(); break;
@@ -113,6 +120,7 @@ void GameLoop::evaluatePlayerProgressChoice(int choice) {
     }
 }
 
+// evaluate the review advisor menu choice
 void GameLoop::evaluateReviewAdvisorChoice(int choice) {
     switch(choice) {
         case 1: reviewAdvisorDescription(); break;
@@ -120,6 +128,7 @@ void GameLoop::evaluateReviewAdvisorChoice(int choice) {
     }
 }
 
+// review the current player's discovery points
 void GameLoop::reviewDiscoverPoints() {
     Player& player = getCurrentPlayer();
 
@@ -128,6 +137,7 @@ void GameLoop::reviewDiscoverPoints() {
          << endl << endl;
 }
 
+// review the current player's trait stats
 void GameLoop::reviewTraitStats() {
     Player& player = getCurrentPlayer();
 
@@ -142,6 +152,7 @@ void GameLoop::reviewTraitStats() {
          << endl << endl;
 }
 
+// review the current player's character and experience
 void GameLoop::reviewCharacter() {
     Player& player = getCurrentPlayer();
     
@@ -151,6 +162,7 @@ void GameLoop::reviewCharacter() {
          << " experience" << endl << endl;
 }
 
+// review the current player's position on the board
 void GameLoop::reviewPosition() {
     Player& player = getCurrentPlayer();
 
@@ -159,6 +171,7 @@ void GameLoop::reviewPosition() {
          << "." << endl << endl;
 }
 
+// review the current player's advisor description
 void GameLoop::reviewAdvisorDescription() { 
     Player& player = getCurrentPlayer();
 
@@ -166,6 +179,7 @@ void GameLoop::reviewAdvisorDescription() {
          << ": " << player.advisor.description << endl << endl;
 }
 
+// review the current player's advisor bonuses
 void GameLoop::reviewAdvisorBonuses() {
     Player& player = getCurrentPlayer();
 
@@ -176,6 +190,7 @@ void GameLoop::reviewAdvisorBonuses() {
          << endl;
 }
 
+// roll a die 1-6 and call a function based on the tile color landed on
 void GameLoop::moveForward() {
     Player& player = getCurrentPlayer();
 
@@ -209,6 +224,7 @@ void GameLoop::moveForward() {
     changeTurn();
 }
 
+// 50% chance to trigger an event for discovery points
 void GameLoop::rolledGreen() {
     if (HelperMethods::randomInt(1)) { // 50% chance
         Player& player = getCurrentPlayer();
@@ -275,6 +291,7 @@ void GameLoop::rolledGreen() {
     }
 }
 
+// DNA strand similarity challenge (same lenngth strands)
 void GameLoop::rolledBlue() {
     string strand1 = DNA::makeInputStrand();
     string strand2 = DNA::makeTargetStrand(strand1, false);
@@ -317,6 +334,7 @@ void GameLoop::rolledBlue() {
     }
 }
 
+// DNA strand similarity challenge (different length strands)
 void GameLoop::rolledPink() {
     string strand1 = DNA::makeInputStrand();
     string strand2 = DNA::makeTargetStrand(strand1, true);
@@ -359,6 +377,7 @@ void GameLoop::rolledPink() {
     }
 }
 
+// DNA to RNA transcription challenge
 void GameLoop::rolledBrown() {
     cout << "Please transcribe the following DNA sequence into RNA by replacing every ";
     DNA::printNeucleotide('T');
@@ -394,6 +413,7 @@ void GameLoop::rolledBrown() {
     }
 }
 
+// DNA mutation identification challenge
 void GameLoop::rolledRed() {
     cout << "Identify the following mutations in the following sequence" << endl
          << "Use " 
@@ -457,6 +477,7 @@ void GameLoop::rolledRed() {
     }
 }
 
+// riddle challenge
 void GameLoop::rolledPurple() {
     int rand_ind = HelperMethods::randomInt(riddles.size() - 1);
     vector<string> riddle = riddles[rand_ind];
@@ -486,20 +507,24 @@ void GameLoop::rolledPurple() {
     }
 }
 
+// finish line reached
 void GameLoop::rolledOrange() {
     Player& player = getCurrentPlayer();
 
     cout << player.name << " has reached the finish line!" << endl << endl;
 }
 
+// get the current turn (0 or 1)
 int GameLoop::getTurn() const {
     return turn;
 }
 
+// get the current player based on the turn
 Player& GameLoop::getCurrentPlayer() {
     return turn == 0 ? player1 : player2;
 }
 
+// change the turn to the next player if applicable
 void GameLoop::changeTurn() {
     if (board.getPlayerPosition(0) == 51) {
         turn = 1;

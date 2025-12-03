@@ -15,7 +15,6 @@ public:
 
 private:
     static void getPlayerNames(Player& player1, Player& player2);
-    static bool isValidIntChoice(string s, int low, int high);
     static void getPlayerColor(Player& player, string taken);
     static void getCharacterChoice(Player& player);
     static void getPathChoice(Player& player);
