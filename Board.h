@@ -12,8 +12,8 @@ class Board {
         static const int _BOARD_SIZE = 52;
         static const int _MAX_PLAYERS = 2;
 
-        Player& player1;
-        Player& player2;
+        Player player1;
+        Player player2;
 
         // Composition!
         Tile _tiles[2][_BOARD_SIZE];
@@ -28,7 +28,7 @@ class Board {
     public:
         // Default Constructor
         Board();
-        Board(Player& p1, Player& p2);
+        Board(Player p1, Player p2);
 
         void initializeBoard();
         void displayTrack(int player_index);

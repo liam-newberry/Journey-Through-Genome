@@ -30,12 +30,12 @@ public:
     static bool stringCompare(string s1, string s2);
     static int makeWholePercent(double d);
 
-    static void sortScores(vector<vector<string>>& scores);
+    static vector<vector<string>> sortScores(vector<vector<string>> scores);
     static vector<vector<string>> getScores();
     static void writeScores(vector<vector<string>> scores);
 
 private:
-    static int getMaxScoreIndex(vector<vector<string>>& scores, int start);
+    static int getMaxScoreIndex(vector<vector<string>> scores, int start);
     static string getOS();
     static bool seedRandom();
     // Member variables

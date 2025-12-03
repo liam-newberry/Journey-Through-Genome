@@ -18,17 +18,16 @@ int main() {
     while (new_game) {
         HelperMethods::clearTerminal();
 
-        Player player1, player2;
-        Setup::intialize_players(player1, player2);
+        vector<Player> players = Setup::intialize_players();
 
         HelperMethods::clearPrintHeading("Game Begin");
 
-        Board board(player1, player2);
-        GameLoop loop(player1, player2, board);
+        Board board(players[0], players[1]);
+        GameLoop loop(players[0], players[1], board);
 
-        loop.runLoop();
+        players = loop.runLoop();
 
-        new_game = EndGame::runLoop(player1, player2);
+        new_game = EndGame::runLoop(players[0], players[1]);
     }
 
     HelperMethods::clearPrintHeading("Thank you for playing!");

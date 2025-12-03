@@ -59,7 +59,7 @@ string DNA::transcribeDNAtoRNA(string strand) {
 
 // identify mutations between two strands and print them if desired
 string DNA::identifyMutations(string input_strand, string target_strand, bool print) {
-    fillInTargetStrand(input_strand, target_strand);
+    target_strand = fillInTargetStrand(input_strand, target_strand);
     
     string mutations = "";
 
@@ -171,7 +171,7 @@ void DNA::printStrand(string strand, string spacing) {
 }
 
 // fill in the target strand with underscores to align with the input strand
-void DNA::fillInTargetStrand(string input_strand, string& target_strand) {
+string DNA::fillInTargetStrand(string input_strand, string target_strand) {
     int displacement = bestStrandMatch(input_strand, target_strand);
 
     for (int i = 0; i < displacement; i++) {
@@ -181,4 +181,6 @@ void DNA::fillInTargetStrand(string input_strand, string& target_strand) {
     for (int i = target_strand.size(); i < input_strand.size(); i++) {
         target_strand += "_";
     }
+
+    return target_strand;
 }

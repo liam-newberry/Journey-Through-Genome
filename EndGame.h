@@ -7,12 +7,12 @@
 
 class EndGame {
 public:
-    static bool runLoop(Player& player1, Player& player2);
+    static bool runLoop(Player player1, Player player2);
 
 private:
-    static void configureDiscoveryPoints(Player& player);
-    static void updateScores(Player& player1, Player& player2);
-    static void printWinnerHeading(Player& player1, Player& player2);
+    static Player configureDiscoveryPoints(Player player);
+    static void updateScores(Player player1, Player player2);
+    static void printWinnerHeading(Player player1, Player player2);
     static int getNextChoice();
     static void displayScores();
 };

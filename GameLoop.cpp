@@ -12,22 +12,24 @@
 using namespace std;
 
 // constructor to initialize players and board and read text files
-GameLoop::GameLoop(Player& p1, Player& p2, Board& b) : player1(p1), player2(p2), board(b) {
+GameLoop::GameLoop(Player p1, Player p2, Board b) : player1(p1), player2(p2), board(b) {
     turn = 0;
     events = HelperMethods::getEvents();
     riddles = HelperMethods::getRiddles();
 }
 
 // main game loop that continues until a player reaches the end of the board
-void GameLoop::runLoop() {
+vector<Player> GameLoop::runLoop() {
     while (board.getPlayerPosition(0) < 51 || board.getPlayerPosition(1) < 51) {
         evaluateMenuChoice(getMenuChoice());
     }
+
+    return {player1, player2};
 }
 
 // get the main menu choice from the user
 int GameLoop::getMenuChoice() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     int numChoices = player.advisor.name == "" ? 4 : 5;
 
@@ -58,7 +60,7 @@ int GameLoop::getMenuChoice() {
 
 // get the player progress menu choice from the user
 int GameLoop::getPlayerProgressChoice() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     string input;
 
@@ -80,7 +82,7 @@ int GameLoop::getPlayerProgressChoice() {
 
 // get the review advisor menu choice from the user
 int GameLoop::getReviewAdvisorChoice() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     string input;
 
@@ -130,7 +132,7 @@ void GameLoop::evaluateReviewAdvisorChoice(int choice) {
 
 // review the current player's discovery points
 void GameLoop::reviewDiscoverPoints() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     cout << "Discovery Points: "
          << EscapeColors::colorString(player.character.getDiscoveryPoints(), EscapeColors::YELLOW)
@@ -139,7 +141,7 @@ void GameLoop::reviewDiscoverPoints() {
 
 // review the current player's trait stats
 void GameLoop::reviewTraitStats() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     cout <<         "Experience: " 
          << EscapeColors::colorString(player.character.getExperience(), EscapeColors::YELLOW)
@@ -154,7 +156,7 @@ void GameLoop::reviewTraitStats() {
 
 // review the current player's character and experience
 void GameLoop::reviewCharacter() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
     
     cout << EscapeColors::colorString(player.character.getName(), EscapeColors::CYAN)
          << " has " 
@@ -164,7 +166,7 @@ void GameLoop::reviewCharacter() {
 
 // review the current player's position on the board
 void GameLoop::reviewPosition() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     cout << player.name << " is at tile " 
          << EscapeColors::colorString(board.getPlayerPosition(turn) + 1, EscapeColors::BLUE)
@@ -173,7 +175,7 @@ void GameLoop::reviewPosition() {
 
 // review the current player's advisor description
 void GameLoop::reviewAdvisorDescription() { 
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     cout << EscapeColors::colorString(player.advisor.name, EscapeColors::MAGENTA)
          << ": " << player.advisor.description << endl << endl;
@@ -181,7 +183,7 @@ void GameLoop::reviewAdvisorDescription() {
 
 // review the current player's advisor bonuses
 void GameLoop::reviewAdvisorBonuses() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     cout << EscapeColors::colorString(player.advisor.name, EscapeColors::MAGENTA)
          << " bonuses: " << endl 
@@ -192,7 +194,7 @@ void GameLoop::reviewAdvisorBonuses() {
 
 // roll a die 1-6 and call a function based on the tile color landed on
 void GameLoop::moveForward() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     int roll = HelperMethods::randomInt(1,6);
     int forward = roll;
@@ -227,7 +229,7 @@ void GameLoop::moveForward() {
 // 50% chance to trigger an event for discovery points
 void GameLoop::rolledGreen() {
     if (HelperMethods::randomInt(1)) { // 50% chance
-        Player& player = getCurrentPlayer();
+        Player player = getCurrentPlayer();
         int rand_ind;
         Event event;
 
@@ -291,7 +293,7 @@ void GameLoop::rolledGreen() {
     }
 }
 
-// DNA strand similarity challenge (same lenngth strands)
+// DNA strand similarity challenge (same length strands)
 void GameLoop::rolledBlue() {
     string strand1 = DNA::makeInputStrand();
     string strand2 = DNA::makeTargetStrand(strand1, false);
@@ -509,7 +511,7 @@ void GameLoop::rolledPurple() {
 
 // finish line reached
 void GameLoop::rolledOrange() {
-    Player& player = getCurrentPlayer();
+    Player player = getCurrentPlayer();
 
     cout << player.name << " has reached the finish line!" << endl << endl;
 }
@@ -520,7 +522,7 @@ int GameLoop::getTurn() const {
 }
 
 // get the current player based on the turn
-Player& GameLoop::getCurrentPlayer() {
+Player GameLoop::getCurrentPlayer() {
     return turn == 0 ? player1 : player2;
 }
 

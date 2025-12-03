@@ -24,7 +24,7 @@
 using namespace std;
 
 // =========================== Constructor ===========================
-Board::Board(Player& p1, Player& p2) : player1(p1), player2(p2) {
+Board::Board(Player p1, Player p2) : player1(p1), player2(p2) {
     // Creates two players
     _player_count = _MAX_PLAYERS;
 
@@ -40,7 +40,7 @@ Board::Board(Player& p1, Player& p2) : player1(p1), player2(p2) {
 // Randomly assigns a set number of each type of tile depending on path to the track 
 void Board::initializeTiles(int player_index) {
     Tile tile;
-    Player& player = player_index == 0 ? player1 : player2;
+    Player player = player_index == 0 ? player1 : player2;
     
     int total_tiles = _BOARD_SIZE;
 

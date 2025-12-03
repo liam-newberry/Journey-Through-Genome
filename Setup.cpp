@@ -12,31 +12,38 @@
 using namespace std;
 
 // setup player traits
-void Setup::intialize_players(Player& player1, Player& player2) {
+vector<Player> Setup::intialize_players() {
+    Player player1, player2;
+    vector<Player> players;
+
     HelperMethods::clearPrintHeading("Names");
-    getPlayerNames(player1, player2);
+    players = getPlayerNames(player1, player2);
+    player1 = players[0];
+    player2 = players[1];
 
     HelperMethods::clearPrintHeading("Colors");
-    getPlayerColor(player1, "");
-    getPlayerColor(player2, player1.color);
+    player1 = getPlayerColor(player1, "");
+    player2 = getPlayerColor(player2, player1.color);
  
     HelperMethods::clearPrintHeading("Characters");
-    getCharacterChoice(player1);
-    getCharacterChoice(player2);
+    player1 = getCharacterChoice(player1);
+    player2 = getCharacterChoice(player2);
 
     HelperMethods::clearPrintHeading("Paths");
-    getPathChoice(player1);
-    getPathChoice(player2);
+    player1 = getPathChoice(player1);
+    player2 = getPathChoice(player2);
 
     if (player1.path == "Training Fellowship" || player2.path == "Training Fellowship") {
         HelperMethods::clearPrintHeading("Advisors");
     }
-    evaluatePathChoice(player1);
-    evaluatePathChoice(player2);
+    player1 = evaluatePathChoice(player1);
+    player2 = evaluatePathChoice(player2);
+
+    return {player1, player2};
 }
 
 // get players' names
-void Setup::getPlayerNames(Player& player1, Player& player2) {
+vector<Player> Setup::getPlayerNames(Player player1, Player player2) {
     cout << "Player 1 name: ";
     cin >> player1.name;
     player1.name = player1.name.substr(0,20); // max name length 20
@@ -46,10 +53,12 @@ void Setup::getPlayerNames(Player& player1, Player& player2) {
     cin >> player2.name;
     player2.name = player2.name.substr(0,20); // max name length 20
     player2.plain_name = player2.name;
+
+    return {player1, player2};
 }
 
 // get the player's color; used every time they're name is displayed
-void Setup::getPlayerColor(Player& player, string taken) {
+Player Setup::getPlayerColor(Player player, string taken) {
     string input;
 
     while (true) { // this is used to make the input safe if the input is invalid
@@ -75,10 +84,12 @@ void Setup::getPlayerColor(Player& player, string taken) {
             HelperMethods::invalidInput();
         }
     }
+
+    return player;
 }
 
 // get players' choice of character
-void Setup::getCharacterChoice(Player& player) {
+Player Setup::getCharacterChoice(Player player) {
     vector<Character> characters = makeCharacters();
 
     string input;
@@ -102,10 +113,12 @@ void Setup::getCharacterChoice(Player& player) {
             HelperMethods::invalidInput();
         }
     }
+
+    return player;
 }
 
 // get the path choice for a player
-void Setup::getPathChoice(Player& player) {
+Player Setup::getPathChoice(Player player) {
     string input;
 
     while (true) { // this is used to make the input safe if the input is invalid
@@ -129,10 +142,12 @@ void Setup::getPathChoice(Player& player) {
             HelperMethods::invalidInput();
         }
     }
+
+    return player;
 }
 
 // get the advisor choice if needed for a player
-void Setup::getAdvisorChoice(Player& player) {
+Player Setup::getAdvisorChoice(Player player) {
     vector<Advisor> advisors = makeAdvisors();
 
     string input;
@@ -155,21 +170,25 @@ void Setup::getAdvisorChoice(Player& player) {
             HelperMethods::invalidInput();
         }
     }
+
+    return player;
 }
 
 // change trait values based on the path chosen
-void Setup::evaluatePathChoice(Player& player) {
+Player Setup::evaluatePathChoice(Player player) {
     if (player.path == "Training Fellowship") {
         player.character.changeDiscoveryPoints(-5000);
         player.character.changeAccuracy(500);
         player.character.changeEfficiency(500);
         player.character.changeInsight(1000);
 
-        getAdvisorChoice(player);
+        player = getAdvisorChoice(player);
     } else if (player.path == "Direct Lab Assignment") {
         player.character.changeDiscoveryPoints(5000);
         player.character.changeAccuracy(200);
         player.character.changeEfficiency(200);
         player.character.changeInsight(200);
     }
+
+    return player;
 }

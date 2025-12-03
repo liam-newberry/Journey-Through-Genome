@@ -135,9 +135,9 @@ int HelperMethods::makeWholePercent(double d) {
 }
 
 // sorts a 2D vector of scores
-void HelperMethods::sortScores(vector<vector<string>>& scores) {
+vector<vector<string>> HelperMethods::sortScores(vector<vector<string>> scores) {
     if (scores.size() <= 1) {
-        return;
+        return scores;
     }
  
     int highest;
@@ -149,6 +149,8 @@ void HelperMethods::sortScores(vector<vector<string>>& scores) {
         scores[i] = scores[highest];
         scores[highest] = temp;
     }
+
+    return scores;
 }
 
 // read the scores into a 2D vector from scores.txt
@@ -181,7 +183,7 @@ void HelperMethods::writeScores(vector<vector<string>> scores) {
 }
 
 // finds the max index of a subsection of scores; helper for sorting
-int HelperMethods::getMaxScoreIndex(vector<vector<string>>& scores, int start) {
+int HelperMethods::getMaxScoreIndex(vector<vector<string>> scores, int start) {
     int highest_ind = start;
 
     for (int i = start + 1; i < scores.size(); i++) {

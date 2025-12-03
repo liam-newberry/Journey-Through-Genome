@@ -11,9 +11,9 @@
 using namespace std;
 
 // main loop for end game options and updating scores
-bool EndGame::runLoop(Player& player1, Player& player2) {
-    configureDiscoveryPoints(player1);
-    configureDiscoveryPoints(player2);
+bool EndGame::runLoop(Player player1, Player player2) {
+    player1 = configureDiscoveryPoints(player1);
+    player2 = configureDiscoveryPoints(player2);
 
     updateScores(player1, player2);
 
@@ -29,7 +29,7 @@ bool EndGame::runLoop(Player& player1, Player& player2) {
 }
 
 // configure discovery points based on stats
-void EndGame::configureDiscoveryPoints(Player& player) {
+Player EndGame::configureDiscoveryPoints(Player player) {
     int total = 0;
     total += player.character.getAccuracy();
     total += player.character.getEfficiency();
@@ -41,16 +41,18 @@ void EndGame::configureDiscoveryPoints(Player& player) {
     total *= 10;
 
     player.character.changeDiscoveryPoints(total);
+
+    return player;
 }
 
 // update the scores file with new scores
-void EndGame::updateScores(Player& player1, Player& player2) {
+void EndGame::updateScores(Player player1, Player player2) {
     vector<vector<string>> scores = HelperMethods::getScores();
 
     scores.push_back({player1.plain_name, to_string(player1.character.getDiscoveryPoints())});
     scores.push_back({player2.plain_name, to_string(player2.character.getDiscoveryPoints())});
 
-    HelperMethods::sortScores(scores);
+    scores = HelperMethods::sortScores(scores);
 
     while (scores.size() > 10) {
         scores.pop_back();
@@ -60,11 +62,11 @@ void EndGame::updateScores(Player& player1, Player& player2) {
 }
 
 // print out the heading announcing the winner and stats
-void EndGame::printWinnerHeading(Player& player1, Player& player2) {
+void EndGame::printWinnerHeading(Player player1, Player player2) {
     if (player1.character.getDiscoveryPoints() == player2.character.getDiscoveryPoints()) {
         HelperMethods::clearPrintHeading("It's a Tie!");
     } else {
-        Player& winner = player1.character.getDiscoveryPoints() > player2.character.getDiscoveryPoints() ?
+        Player winner = player1.character.getDiscoveryPoints() > player2.character.getDiscoveryPoints() ?
             player1 : player2;
         HelperMethods::clearPrintHeading(winner.name + EscapeColors::colorString(" Wins!", EscapeColors::MAGENTA));
     }

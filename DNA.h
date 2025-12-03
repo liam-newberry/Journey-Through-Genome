@@ -20,7 +20,7 @@ public:
     static void printStrand(string strand, string spacing);
 
 private:
-    static void fillInTargetStrand(string input_strand, string& target_strand);
+    static string fillInTargetStrand(string input_strand, string target_strand);
 };
 
 #endif

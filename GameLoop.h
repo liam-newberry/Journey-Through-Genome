@@ -7,10 +7,12 @@
 #include "Board.h"
 #include "Event.h"
 
+#include <vector>
+
 class GameLoop {
 public:
-    GameLoop(Player& p1, Player& p2, Board& b);
-    void runLoop();
+    GameLoop(Player p1, Player p2, Board b);
+    vector<Player> runLoop();
 
 private:
     int getMenuChoice();
@@ -38,11 +40,11 @@ private:
     void rolledOrange();
 
     int getTurn() const;
-    Player& getCurrentPlayer();
+    Player getCurrentPlayer();
     void changeTurn();
     // Member variables
-    Player& player1, player2;
-    Board& board;
+    Player player1, player2;
+    Board board;
     int turn;
     // Events and Riddles from text files
     vector<Event> events;
