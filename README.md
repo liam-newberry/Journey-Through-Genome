@@ -1,4 +1,4 @@
-# CSCI 1300 Terminal Game
+# Journey Through the Genome
 
 A simple terminal game for the CSCI 1300 class at the University of Colorado at Boulder.  
 Written by Liam Newberry & Lyle Stone.
