@@ -58,11 +58,11 @@ void Board::initializeTiles(int player_index) {
         reds =      2;
         purples =   4;
     } else if (player.path == "Direct Lab Assignment") {
-        greens =    0;
+        greens =    30;
         blues =     4;
         pinks =     3;
         browns =    4;
-        reds =      36;
+        reds =      6;
         purples =   3;
     }
 

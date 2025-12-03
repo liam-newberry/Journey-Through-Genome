@@ -7,6 +7,8 @@
 #include "HelperMethods.h"
 #include "EndGame.h"
 
+#include <iostream>
+
 using namespace std;
 
 // main driver function
@@ -30,6 +32,9 @@ int main() {
     }
 
     HelperMethods::clearPrintHeading("Thank you for playing!");
+
+    cout << "Game written by: Liam Newberry & Lyle Stone" << endl
+         << "This work is released into the public domain, 2025.";
 
     return 0;
 }
