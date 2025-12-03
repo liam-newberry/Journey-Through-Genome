@@ -13,3 +13,5 @@ To play the game on Mac:
    ```bash
    g++ *.cpp -o game.out
    ./game.out
+
+If you would like to reset the all time scores, just delete scores.txt.
