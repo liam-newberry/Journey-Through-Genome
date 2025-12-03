@@ -401,6 +401,19 @@ void GameLoop::rolledRed() {
          << EscapeColors::colorString("s", EscapeColors::YELLOW) << " for substitution, and "
          << EscapeColors::colorString("d", EscapeColors::RED) 
          << " for deletion to represent the mutations in order" << endl
+
+         << "An " << EscapeColors::colorString("insertion", EscapeColors::BLUE)
+         << " is when there is a "
+         << EscapeColors::colorString("deletion", EscapeColors::RED)
+         << " to the left or right of a mismatch" << endl
+
+         << "A " << EscapeColors::colorString("substitution", EscapeColors::YELLOW)
+         << " is a mismatch that is not a " 
+         << EscapeColors::colorString("deletion", EscapeColors::RED) << endl
+
+         << "A " << EscapeColors::colorString("deletion", EscapeColors::RED) 
+         << " is when there is a missing neucleotide" << endl
+
          << "Example: dsssi" << endl << endl;
     
     string strand1 = DNA::makeInputStrand();
