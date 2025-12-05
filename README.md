@@ -14,4 +14,12 @@ To play the game on Mac:
    g++ *.cpp -o game.out
    ./game.out
 
+To play the game on Windows:
+1. Download the zip from GitHub.
+2. Open a VSCode terminal in that folder.
+3. In the terminal, run:
+   ```bash
+   g++ *.cpp -o game.exe
+   ./game.exe
+
 If you would like to reset the all time scores, just delete scores.txt.
