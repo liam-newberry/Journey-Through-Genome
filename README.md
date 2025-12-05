@@ -5,7 +5,7 @@ Written by Liam Newberry & Lyle Stone.
 
 ## How to Play
 
-To play the game on Mac:
+To play the game on **Mac**:
 
 1. Download the zip from GitHub.
 2. Open a VSCode terminal in that folder.
@@ -13,13 +13,17 @@ To play the game on Mac:
    ```bash
    g++ *.cpp -o game.out
    ./game.out
-
-To play the game on Windows:
+To play the game on **Windows**:
 1. Download the zip from GitHub.
 2. Open a VSCode terminal in that folder.
 3. In the terminal, run:
    ```bash
    g++ *.cpp -o game.exe
    ./game.exe
+## Extras
 
 If you would like to reset the all time scores, just delete scores.txt.
+
+## Licensing
+
+This work is released into the public domain, 2025.
