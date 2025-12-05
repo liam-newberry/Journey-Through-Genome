@@ -93,7 +93,6 @@ Player Setup::getCharacterChoice(Player player) {
     vector<Character> characters = makeCharacters();
 
     string input;
-    int intInput;
 
     while (true) { // this is used to make the input safe if the input is invalid
         printHeaders();
@@ -151,7 +150,6 @@ Player Setup::getAdvisorChoice(Player player) {
     vector<Advisor> advisors = makeAdvisors();
 
     string input;
-    int intInput;
 
     while (true) { // this is used to make the input safe if the input is invalid
         for (int i = 0; i < advisors.size(); i++) {
